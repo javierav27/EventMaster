@@ -1,4 +1,4 @@
-package com.example.eventmaster.data
+package com.example.eventmaster.models
 
 import kotlinx.serialization.Serializable
 import java.util.UUID

@@ -11,9 +11,9 @@ fun CustomTextField(
     value: String,
     onValueChange: (String) -> Unit,
     label: String,
-    modifier: Modifier = Modifier,
     isError: Boolean = false,
-    errorMessage: String? = null
+    errorMessage: String? = null,
+    modifier: Modifier = Modifier.fillMaxWidth()
 ) {
     OutlinedTextField(
         value = value,
@@ -21,10 +21,8 @@ fun CustomTextField(
         label = { Text(label) },
         isError = isError,
         supportingText = {
-            if (isError && errorMessage != null) {
-                Text(errorMessage)
-            }
+            if (isError && errorMessage != null) Text(errorMessage)
         },
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
     )
 }

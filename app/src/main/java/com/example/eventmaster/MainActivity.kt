@@ -18,9 +18,11 @@ import com.example.eventmaster.ui.theme.EventMasterTheme
 import com.example.eventmaster.viewmodel.EventMasterViewModel
 import kotlinx.serialization.Serializable
 
-// Definir rutas usando serialización para ir pasando lps datos)
 @Serializable
 object Home
+
+@Serializable
+data class Events(val categoryId: String)
 
 @Serializable
 object AddCategory
@@ -36,10 +38,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             EventMasterTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
+                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
                     EventMasterApp()
                 }
             }
@@ -57,8 +56,17 @@ fun EventMasterApp() {
             HomeScreen(
                 viewModel = viewModel,
                 onAddCategoryClick = { navController.navigate(AddCategory) },
-                onAddEventClick = { categoryId -> navController.navigate(AddEvent(categoryId)) },
-                onEventClick = { eventId -> navController.navigate(EventDetail(eventId)) }
+                onCategoryClick = { categoryId -> navController.navigate(Events(categoryId)) }
+            )
+        }
+        composable<Events> { backStackEntry ->
+            val args = backStackEntry.toRoute<Events>()
+            EventsScreen(
+                viewModel = viewModel,
+                categoryId = args.categoryId,
+                onAddEventClick = { navController.navigate(AddEvent(args.categoryId)) },
+                onEventClick = { eventId -> navController.navigate(EventDetail(eventId)) },
+                onNavigateBack = { navController.popBackStack() }
             )
         }
         composable<AddCategory> {

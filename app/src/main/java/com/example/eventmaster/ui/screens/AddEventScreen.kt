@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.eventmaster.R
-import com.example.eventmaster.data.Event
+import com.example.eventmaster.models.Event
 import com.example.eventmaster.ui.components.CustomTextField
 import com.example.eventmaster.viewmodel.EventMasterViewModel
 
@@ -29,7 +29,6 @@ fun AddEventScreen(
     var description by remember { mutableStateOf("") }
     var errors by remember { mutableStateOf(mapOf<String, Boolean>()) }
 
-    // todos los campos son obligatorios
     fun isValid(): Boolean {
         val newErrors = mutableMapOf<String, Boolean>()
         if (name.isBlank()) newErrors["name"] = true

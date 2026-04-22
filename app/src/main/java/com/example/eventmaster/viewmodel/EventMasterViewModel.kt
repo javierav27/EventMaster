@@ -2,18 +2,17 @@ package com.example.eventmaster.viewmodel
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
-import com.example.eventmaster.data.Category
-import com.example.eventmaster.data.Event
+import com.example.eventmaster.models.Category
+import com.example.eventmaster.models.Event
 
 class EventMasterViewModel : ViewModel() {
 
+    // Listas observables (datos en memoria RAM)
     private val _categories = mutableStateListOf<Category>()
     val categories: List<Category> = _categories
 
-    // Lista observable de eventos
     private val _events = mutableStateListOf<Event>()
     val events: List<Event> = _events
-
     init {
         // Datos de ejemplo iniciales
         _categories.addAll(
@@ -37,6 +36,7 @@ class EventMasterViewModel : ViewModel() {
             )
         )
     }
+
 
     fun addCategory(name: String) {
         if (name.isNotBlank()) {
