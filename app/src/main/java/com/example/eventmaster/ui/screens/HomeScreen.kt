@@ -44,10 +44,8 @@ fun HomeScreen(
                 .padding(16.dp)
         ) {
             items(viewModel.categories) { category ->
-                val categoryEvents = viewModel.getEventsByCategory(category.id)
                 CategoryCard(
                     category = category,
-                    events = categoryEvents,
                     onClick = { onCategoryClick(category.id) }
                 )
             }

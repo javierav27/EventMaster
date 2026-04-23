@@ -11,12 +11,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.eventmaster.models.Category
-import com.example.eventmaster.models.Event
 
 @Composable
 fun CategoryCard(
     category: Category,
-    events: List<Event> = emptyList(),
     onClick: () -> Unit
 ) {
     Card(
@@ -30,18 +28,6 @@ fun CategoryCard(
                 text = category.name,
                 style = MaterialTheme.typography.titleLarge
             )
-            
-            if (events.isEmpty()) {
-                Text(
-                    text = "No hay eventos",
-                    modifier = Modifier.padding(top = 8.dp),
-                    style = MaterialTheme.typography.bodySmall
-                )
-            } else {
-                events.forEach { event ->
-                    EventCard(event = event, onClick = { /* Navigate to event detail */ })
-                }
-            }
         }
     }
 }
